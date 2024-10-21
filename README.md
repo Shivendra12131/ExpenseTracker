@@ -1,6 +1,4 @@
-Sure! Below is the entire `README.md` content formatted as code. You can copy and paste this into a new file called `README.md` in your project directory.
 
-```markdown
 # Expense Tracker Application
 
 ## Overview
