@@ -1,70 +1,156 @@
-# Getting Started with Create React App
+Sure! Below is the entire `README.md` content formatted as code. You can copy and paste this into a new file called `README.md` in your project directory.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```markdown
+# Expense Tracker Application
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+This Expense Tracker Application allows users to create trips and manage expenses associated with those trips. Users can sign up, log in, create trips, and add expenses, while tracking individual contributions.
 
-### `npm start`
+## Table of Contents
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Testing the API](#testing-the-api)
+- [Contributing](#contributing)
+- [License](#license)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+- User authentication (signup and login)
+- Create trips with descriptions and participants
+- Add expenses with different split types (equal, exact, percentage)
+- Retrieve expenses for a specific user or for all users
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Requirements
 
-### `npm run build`
+- Node.js (v14 or later)
+- MongoDB (running instance)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Navigate into the project directory:
+   ```bash
+   cd expenses_app
+   ```
+3. Install the required dependencies:
+   ```bash
+   npm install
+   ```
+4. Create a `.env` file in the root directory and add your environment variables (like MongoDB connection string and JWT secret).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   Example `.env` file:
+   ```env
+   PORT=4000
+   JWT_SECRET=your_jwt_secret
+   MONGODB_URI=mongodb://localhost:27017/your_db_name
+   ```
 
-### `npm run eject`
+5. Start the server:
+   ```bash
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Usage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### API Endpoints
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **User Authentication**
+  - **Signup**
+    - **POST** `/api/v1/signup`
+    - **Request Body:**
+      ```json
+      {
+        "email": "user@example.com",
+        "password": "yourpassword"
+      }
+      ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  - **Login**
+    - **POST** `/api/v1/login`
+    - **Request Body:**
+      ```json
+      {
+        "email": "user@example.com",
+        "password": "yourpassword"
+      }
+      ```
 
-## Learn More
+- **Trip Management**
+  - **Create a Trip**
+    - **POST** `/api/v1/trips`
+    - **Request Body:**
+      ```json
+      {
+        "tripName": "Trip Name",
+        "tripDescription": "Description of the trip",
+        "participants": ["Participant1", "Participant2"]
+      }
+      ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Expense Management**
+  - **Add an Expense**
+    - **POST** `/api/v1/expenses`
+    - **Request Body:**
+      ```json
+      {
+        "tripId": "trip_id_here",
+        "name": "Expense Name",
+        "amount": 100,
+        "splitType": "equal",
+        "splitDetails": [
+          {
+            "participantName": "Participant1",
+            "amountOwed": 50
+          },
+          {
+            "participantName": "Participant2",
+            "amountOwed": 50
+          }
+        ]
+      }
+      ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Retrieve User Expenses**
+  - **GET** `/api/v1/getExpenses/:userId`
+    - Replace `:userId` with the participant's name.
 
-### Code Splitting
+- **Retrieve All Expenses**
+  - **GET** `/api/v1/expenses`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Testing the API
 
-### Analyzing the Bundle Size
+You can test the API using tools like [Postman](https://www.postman.com/) or [cURL](https://curl.se/).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. **Testing User Signup:**
+   - Send a POST request to `/api/v1/signup` with the required body.
 
-### Making a Progressive Web App
+2. **Testing User Login:**
+   - Send a POST request to `/api/v1/login` with the required body.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+3. **Testing Trip Creation:**
+   - After logging in, send a POST request to `/api/v1/trips`.
 
-### Advanced Configuration
+4. **Testing Expense Addition:**
+   - Send a POST request to `/api/v1/expenses` with the expense details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+5. **Retrieve Expenses:**
+   - Use the GET methods to retrieve expenses for a specific user or all expenses.
 
-### Deployment
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Contributions are welcome! Please feel free to submit a pull request or open an issue.
 
-### `npm run build` fails to minify
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```
+
+After creating the `README.md` file, you can push it to your GitHub repository. Let me know if you need help with anything else!
